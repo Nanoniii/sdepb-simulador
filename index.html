@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Orbitron:wght@800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mp4-muxer@5.1.3/build/mp4-muxer.min.js"></script>
 <style>
 :root{--ui-bg:#f3f4f2;--ui-fg:#1b1f1c;--ui-card:#fff;--ui-line:#d4d8d3;
 --bg:#0f3d24;--a:#c8102e;--b:#e6007e;--hi:#5cf26b;--tx:#fff;
@@ -201,10 +202,61 @@ body[data-t="2"] #pt [data-p="mp"],body[data-t="2"] #pt [data-p="pc"]{display:no
 #insp input[type=text]{flex:1;min-width:150px}
 @media (max-width:600px){.top button{padding:6px 10px}.tabs button{padding:6px 8px;font-size:14px}}
 .pn .bt input[type=color]{width:30px;height:26px;border:0}
+
+#pt [data-p=pg],#pt [data-p=pi]{display:none}
+body[data-t="3"] #pt [data-p=pg],body[data-t="4"] #pt [data-p=pi]{display:block}
+body[data-t="3"] #pt [data-p=mp],body[data-t="3"] #pt [data-p=pc],body[data-t="4"] #pt [data-p=mp],body[data-t="4"] #pt [data-p=pc]{display:none}
+#s3{background:#212328;color:#fff;font:700 13px 'Courier New',ui-monospace,monospace}
+#cs{position:absolute;inset:0;width:960px;height:540px}
+#s3 .tb{position:absolute;left:10px;top:10px;display:flex;gap:10px;z-index:2}
+#s3 .tb button{font:700 13px 'Courier New',monospace;color:#fff;background:#212328;border:1px solid #555;padding:6px 8px;cursor:pointer}
+#s3 .tb .g{display:flex}#s3 .tb button.on{background:#2f66f0;border-color:#2f66f0}
+#s3 h2{position:absolute;right:16px;top:10px;margin:0;font:700 15px 'Courier New',monospace;text-align:right;max-width:420px}
+.pl,.pr{position:absolute;top:14px;width:224px;text-align:center}.pl{left:14px}.pr{right:14px;opacity:.3;transition:opacity .6s}.pr.on{opacity:1}
+.pl .slot,.pr .slot{height:300px;border-radius:26px;box-shadow:0 6px 20px rgba(0,0,0,.45);margin-bottom:10px}
+.pl .slot{border-left:6px solid var(--a)}.pr .slot{border-left:6px solid var(--hi)}
+.pl .nm,.pr .nm{font-size:17px}
+.stamp{position:absolute;left:8px;right:8px;top:120px;transform:rotate(-14deg);border:4px solid #e5253a;color:#e5253a;font:800 32px var(--fh);padding:4px;background:rgba(0,0,0,.55);opacity:0;transition:opacity .4s}
+.pm{position:absolute;left:252px;right:252px;top:10px;text-align:center}
+.pm h1{margin:0;font:800 30px var(--fh)}
+.mo{font-size:10.5px;line-height:1.3;font-weight:600;margin:6px 0;text-transform:uppercase}
+#isv{width:100%;height:auto;display:block}
+.lg{display:flex;justify-content:space-around;font-size:10px;font-weight:800}
+.lg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}.lg b{display:block;font:800 18px var(--fh)}
+.rb{margin-top:8px;font:800 19px var(--fh);opacity:0;transition:opacity .5s}
+#gcsv{width:100%;font:13px ui-monospace,monospace;background:var(--ui-bg);color:var(--ui-fg);border:1px solid var(--ui-line);border-radius:8px;padding:8px}
+
+.pn button{font:inherit;font-size:15px;min-height:42px;padding:6px 14px;border:1px solid var(--ui-line);border-radius:8px;background:var(--ui-bg);color:var(--ui-fg);cursor:pointer}
+.pn button.on{background:var(--ui-fg);color:var(--ui-bg)}
+.pn input[type=date]{font:inherit;font-size:15px;min-height:42px;padding:4px 8px;border:1px solid var(--ui-line);border-radius:8px;background:var(--ui-bg);color:var(--ui-fg)}
+.sr input[type=text][data-f=n]{min-width:130px;flex:1}.sr input[size="4"]{width:70px;min-width:0}
+#gtb{max-height:300px;overflow:auto;border:1px solid var(--ui-line);border-radius:8px}
+#gtb table{border-collapse:collapse;width:100%}#gtb th,#gtb td{padding:2px;font-size:13px}
+#gtb input{width:100%;min-width:70px;font:inherit;font-size:14px;padding:4px;border:1px solid var(--ui-line);border-radius:6px;background:var(--ui-bg);color:var(--ui-fg)}
+.norec *{transition:none!important}
+.mn .slot.ml{display:none!important}
+body[data-t="3"] #pt [data-p="pf"]{display:none}
+.top{flex-wrap:wrap}
+#pt [data-p=pq]{display:none}
+body[data-t="5"] #pt [data-p=pq]{display:block}
+body[data-t="5"] #pt [data-p=mp],body[data-t="5"] #pt [data-p=pc],body[data-t="5"] #pt [data-p=pf],body[data-t="5"] #pt [data-p=pg],body[data-t="5"] #pt [data-p=pi]{display:none}
+.qh{position:absolute;left:0;right:0;top:12px;margin:0;text-align:center;font:800 36px/1.1 var(--fh);letter-spacing:1px;text-transform:uppercase;text-shadow:0 3px 6px rgba(0,0,0,.5)}
+.qsub{position:absolute;left:0;right:0;top:66px;text-align:center;font:700 17px/1.2 var(--fb);letter-spacing:.5px;text-transform:uppercase}
+#qc{position:absolute;inset:0;pointer-events:none}
+#qc svg{position:absolute;left:0;top:0;width:960px;height:540px}
+#qc .t{position:absolute;white-space:nowrap;text-align:center;font-family:var(--fb);font-weight:800;color:var(--tx);line-height:1;text-shadow:0 1px 3px rgba(0,0,0,.65)}
+#qc .t.r{text-align:right}#qc .t.l{text-align:left}
+#qtb{max-height:340px;overflow:auto;border:1px solid var(--ui-line);border-radius:8px}
+#qtb table{border-collapse:collapse;width:100%}
+#qtb th,#qtb td{padding:2px;font-size:13px;white-space:nowrap}
+#qtb input[type=text]{width:100%;min-width:76px;font:inherit;font-size:14px;min-height:0;padding:4px;border:1px solid var(--ui-line);border-radius:6px;background:var(--ui-bg);color:var(--ui-fg)}
+#qtb th input[type=text]{min-width:130px;width:calc(100% - 70px)}
+#qtb input[type=color]{width:30px;height:26px;padding:0;border:0;vertical-align:middle}
+#qtb button{min-height:30px;padding:2px 9px}
 </style>
 </head>
 <body>
-<div class="top"><div class="seg"><button id="t1" class="on">Eleição</button><button id="t2">Governo</button></div>
+<div class="top"><div class="seg"><button id="t1" class="on">Eleição</button><button id="t2">Governo</button><button id="t3">Gráfico</button><button id="t4">Impeachment</button><button id="t5">Pesquisa</button></div>
   <div class="zoom"><button id="zo" aria-label="Diminuir zoom">−</button><button id="zf">Ajustar</button><button id="zi" aria-label="Aumentar zoom">+</button></div></div>
 <div id="fit"><div id="pan"><div id="stage"><div class="bgfx"></div><div class="bgimg" id="bgimg"></div>
 
@@ -228,8 +280,7 @@ body[data-t="2"] #pt [data-p="mp"],body[data-t="2"] #pt [data-p="pc"]{display:no
     <div class="inc"><div class="slot"></div><div><small contenteditable>TITULAR:</small><span class="tt" contenteditable>SIGLA</span><small contenteditable>Candidato do Governo: Nome (3º)</small></div></div>
     <div class="yr"><div class="row"><b contenteditable>2002</b><div class="slot flag" id="flag" title="Clique para escolher outra bandeira"></div></div><span contenteditable>PRIMEIRO TURNO</span></div>
     <div class="map" id="m1"></div>
-    <div class="map2" id="m2"></div>
-    <div class="minors">
+        <div class="minors">
       <div class="mn"><div class="sm" contenteditable>PARTIDO - Centro</div><div class="slot"></div><div class="box" contenteditable>NOME<i>00,00%</i></div></div>
       <div class="mn"><div class="sm" contenteditable>PARTIDO - Centro</div><div class="slot"></div><div class="box" contenteditable>NOME<i>00,00%</i></div></div>
       <div class="mn"><div class="sm" contenteditable>PARTIDO - Esquerda</div><div class="slot"></div><div class="box" contenteditable>NOME<i>00,00%</i></div></div>
@@ -277,9 +328,27 @@ body[data-t="2"] #pt [data-p="mp"],body[data-t="2"] #pt [data-p="pc"]{display:no
   <div class="tag" contenteditable>REALIDADE ALTERNATIVA · conteúdo fictício</div>
 </section>
 
+
+<section class="scr" id="s3"><svg id="cs" viewBox="0 0 960 540"></svg>
+<div class="tb"><button id="grp" type="button">Replay</button><span class="g"><button id="gsc" type="button" class="on">Scores</button><button id="grk" type="button">Ranks</button></span></div>
+<h2 contenteditable id="gtt">Segundo turno 2014 · pesquisas</h2></section>
+<section class="scr" id="s4">
+<div class="pl"><div class="slot" id="ph1"></div><div class="stamp" id="ist" contenteditable>AFASTADO</div><div class="stamp" id="ist2" style="font-size:22px;transform:rotate(-8deg)">MANTIDO NO CARGO</div><div class="sm" contenteditable>- PARTIDO -</div><div class="nm" contenteditable>PRESIDENTE DERRUBADO</div><div class="sm" contenteditable>MANDATO: 2015 – 2016</div></div>
+<div class="pm"><h1 contenteditable>IMPEACHMENT</h1><div class="dt" contenteditable>17/04/2016 · CÂMARA DOS DEPUTADOS</div>
+<div class="mo"><b contenteditable>MOTIVO:</b> <span contenteditable>Crime de responsabilidade: escreva aqui o motivo do impeachment.</span></div>
+<svg id="isv" viewBox="0 0 420 225"></svg>
+<div class="lg"><div><i id="lc0"></i><span contenteditable>A FAVOR</span><b id="ic0">0</b></div><div><i id="lc1"></i><span contenteditable>CONTRA</span><b id="ic1">0</b></div><div><i id="lc2"></i><span contenteditable>ABSTENÇÃO</span><b id="ic2">0</b></div><div><i id="lc3"></i><span contenteditable>AUSENTES</span><b id="ic3">0</b></div></div>
+<div class="rb" id="ib"></div></div>
+<div class="pr" id="ivp"><div class="sm" contenteditable>ASSUME A PRESIDÊNCIA</div><div class="slot" id="ph2"></div><div class="nm" contenteditable>NOME DO VICE</div><div class="sm" contenteditable>VICE-PRESIDENTE · - PARTIDO -</div></div>
+<div class="tag" contenteditable>REALIDADE ALTERNATIVA · conteúdo fictício</div></section>
+<section class="scr" id="s5">
+<h1 class="qh" id="qt" contenteditable>ELEIÇÕES 2026</h1>
+<div class="qsub" id="qs" contenteditable>PESQUISAS 1T</div>
+<div id="qc"></div>
+</section>
 </div></div>
 <div class="tip2">Dica: use <b>+</b> para aproximar e toque nos textos para editar. Toque nos quadros escuros para enviar imagens.</div>
-<nav class="tabs" id="pt"><button data-p="mp" class="on">Mapa</button><button data-p="pc">Candidatos</button><button data-p="pa">Aparência</button><button data-p="pp">Projeto</button></nav>
+<nav class="tabs" id="pt"><button data-p="mp" class="on">Mapa</button><button data-p="pc">Candidatos</button><button data-p="pf">Foto</button><button data-p="pq">Pesquisa</button><button data-p="pa">Aparência</button><button data-p="pg">Dados</button><button data-p="pi">Votação</button><button data-p="pp">Projeto</button></nav>
 
 <section class="pn show" id="mp">
   <h4>1. Escolha a cor do pincel</h4>
@@ -296,9 +365,9 @@ body[data-t="2"] #pt [data-p="mp"],body[data-t="2"] #pt [data-p="pc"]{display:no
     <input type="text" id="iT" placeholder="texto do nome (opcional)"><input type="text" id="iV" placeholder="valor, ex: 47,39%"><button id="iR" type="button">Reposicionar</button></div>
   <p class="help">Para colocar o nome ao lado do estado, arraste o nome. Duplo toque no estado liga/desliga o nome.</p>
   <h4>Tamanho e posição do mapa</h4>
-  <div class="mc"><label>Mapa <select id="mc"><option value="0">1</option><option value="1">2</option></select></label>
+  <div class="mc"><label style="display:none"><select id="mc"><option value="0">1</option></select></label>
     <label>Tamanho <input type="range" id="ms" min="40" max="260" value="100"></label>
-    <button id="mx" type="button">Expandir</button><button id="md" type="button">Excluir</button><button id="mr" type="button">Restaurar mapas</button></div>
+    <button id="mx" type="button">Expandir</button><button id="md" type="button">Excluir</button><button id="mr" type="button">Restaurar mapa</button></div>
   <div class="row"><span>Mover:</span><button id="al" type="button">←</button><button id="au" type="button">↑</button><button id="ad" type="button">↓</button><button id="ar" type="button">→</button></div>
   <h4>Borda e balões</h4>
   <div class="row"><label>Borda <input type="color" id="bc" value="#ffffff"><input type="range" id="bw" min="0" max="4" step=".2" value="1"></label>
@@ -312,6 +381,29 @@ body[data-t="2"] #pt [data-p="mp"],body[data-t="2"] #pt [data-p="pc"]{display:no
   <h4>Candidatos menores (parte de baixo)</h4>
   <div class="row"><label><input type="checkbox" id="k1" checked> Candidato 1</label><label><input type="checkbox" id="k2" checked> Candidato 2</label><label><input type="checkbox" id="k3" checked> Candidato 3</label></div>
   <p class="help">No 2º turno os três somem, o texto vira "SEGUNDO TURNO" e o mapa cresce um pouco. Dá para mexer em cada um separadamente.</p>
+  <h4>Trocar de lado</h4>
+  <div class="row"><button id="swp" type="button">⇄ Inverter candidato A e B</button></div>
+  <p class="help">Troca os dois cartões de lugar (foto, logo, textos e porcentagens) e leva as cores junto. O mapa continua com as mesmas cores, agora ligadas ao candidato do outro lado.</p>
+</section>
+
+<section class="pn" id="pq">
+  <h4>Tipo de gráfico</h4>
+  <div class="row"><label>Tipo <select id="qtype"><option value="bar">Barras</option><option value="line">Linhas</option></select></label><label><input type="checkbox" id="qvals"> Mostrar números</label><label><input type="checkbox" id="qgrid"> Eixo e grade</label></div>
+  <div class="row"><label>Casas decimais <select id="qdec"><option value="0">0</option><option value="1">1</option><option value="2">2</option></select></label><label><input type="checkbox" id="qpct"> Mostrar %</label><label>Eixo máx <input type="text" id="qmax" size="4" placeholder="auto" inputmode="decimal"></label></div>
+  <div class="row"><label>Tamanho dos números <input type="range" id="qfs" min="0" max="30" value="0"></label><label><input type="checkbox" id="qsort"> Barras do maior pro menor</label></div>
+  <h4>Dados (períodos nas linhas, candidatos nas colunas)</h4>
+  <div id="qtb"></div>
+  <div class="row"><button id="qap" type="button">+ Período</button><button id="qas" type="button">+ Candidato</button></div>
+  <p class="help">Título e subtítulo: toque direto no texto do gráfico. Cores do fundo e fontes ficam em Aparência. O gráfico é fixo, sem animação. Com "Linhas" os números se separam sozinhos (em cima/embaixo) quando os pontos ficam próximos.</p>
+</section>
+
+<section class="pn" id="pf">
+  <h4>Ajustar foto (centralizar no rosto)</h4>
+  <div class="row"><label>Foto <select id="fs"></select></label><button id="fr" type="button">Centralizar</button></div>
+  <div class="row"><label>Esquerda ⟷ Direita <input type="range" id="fx" min="0" max="100" step="1" value="50"></label></div>
+  <div class="row"><label>Cima ⟷ Baixo <input type="range" id="fy" min="0" max="100" step="1" value="50"></label></div>
+  <div class="row"><label>Zoom <input type="range" id="fz" min="100" max="300" step="1" value="100"></label></div>
+  <p class="help">Escolha a foto na lista e mexa nos controles até o candidato ficar no centro do quadro. Vale para candidatos, presidente, titular e fotos do impeachment. Ao enviar uma imagem nova, o ajuste volta ao padrão.</p>
 </section>
 
 <section class="pn" id="pa">
@@ -341,6 +433,34 @@ body[data-t="2"] #pt [data-p="mp"],body[data-t="2"] #pt [data-p="pc"]{display:no
   <p class="help">Salva textos, imagens, mapas e cores num arquivo para continuar depois. A imagem final sai pelo botão "Gerar imagem".</p>
 </section>
 
+
+<section class="pn" id="pg">
+<h4>Qual gráfico?</h4>
+<div class="row"><button id="gk1" type="button">1º turno (Jan–Out)</button><button id="gk2" type="button">2º turno (Out)</button><label>Título <input type="text" id="gttl"></label></div>
+<h4>Datas</h4>
+<div class="row"><label>Tipo <select id="gkind"><option value="d">Dias</option><option value="m">Só os meses</option></select></label></div>
+<div class="row" id="gdw"><label>De <input type="date" id="gs"></label><label>Até <input type="date" id="ge"></label><label>Passo <select id="gst"><option value="1">1 dia</option><option value="2">2 dias</option><option value="7">1 semana</option></select></label><label>Formato <select id="gf"><option value="dm">05/10</option><option value="dmy">05/10/2014</option><option value="ext">5 out</option></select></label></div>
+<div class="row" id="gmw"><label>De <select id="gms"></select></label><label>Até <select id="gme"></select></label></div>
+<h4>Políticos (nome, cor, quanto começa e como termina)</h4>
+<div id="gser"></div><div class="row"><button id="gadd" type="button">+ Político</button></div>
+<h4>Candidatura barrada (substituição)</h4>
+<div class="row"><label>Barrado <select id="gbo"></select></label><label>Novo candidato <input type="text" id="gbn" placeholder="Nome (PARTIDO)"></label><label>Cor <input type="color" id="gbc" value="#22c55e"></label><label>Começa <input type="text" id="gba" size="4" value="10" inputmode="decimal"></label><label>Termina <input type="text" id="gbb" size="4" value="25" inputmode="decimal"></label><label>Último dia do barrado <select id="gbd"></select></label></div>
+<div class="row"><button id="gbap" type="button">Aplicar substituição</button><button id="gbcl" type="button">Todos no período todo</button></div>
+<p class="help">O barrado aparece nas pesquisas até a data escolhida despenca aos poucos e some do gráfico em fade; o novo candidato é criado na hora e entra na linha no dia seguinte, começando do valor "Começa" e terminando no "Termina". Dá para ajustar "Aparece em / Sai em" de cada político manualmente acima. Combine com "Ranks" para ver o ranking mudar.</p>
+<h4>Como a porcentagem evolui</h4>
+<div class="row"><label>Cenário <select id="gscn"><option value="">Escolher…</option><option value="close">Disputa acirrada</option><option value="down">1º decai bastante</option><option value="up">1º sobe bastante</option><option value="flip">Virada no final</option><option value="flat">Estável</option></select></label>
+<label>Ritmo <select id="gpace"><option value="smooth">Suave</option><option value="lin">Constante</option><option value="early">Mudança no começo</option><option value="late">Mudança no fim</option></select></label>
+<label>Oscilação <input type="range" id="gvol" min="0" max="8" step=".5"></label>
+<label><input type="checkbox" id="gcomp"> 2º = 100 − 1º</label><button id="gseed" type="button">🎲 Sortear de novo</button></div>
+<p class="help">Escolha um cenário ou ajuste cada político. Mexer aqui recalcula tudo; para controlar dia a dia, edite a tabela abaixo.</p>
+<h4>Editar dia a dia</h4><div id="gtb"></div>
+<details><summary class="help">Avançado: colar CSV do Excel</summary><textarea id="gcsv" rows="8"></textarea></details>
+<h4>Animação</h4><div class="row"><button id="gre" type="button">▶ Replay</button><button id="gmp4" type="button">⬇ Salvar MP4</button><label>Duração <input type="range" id="gdur" min="3" max="40" value="12"></label><label>Linha do tempo <input type="range" id="gt" min="0" max="1000" value="0"></label><label><input type="checkbox" id="gz" checked> Eixo começa em 0</label></div></section>
+<section class="pn" id="pi"><h4>Votação</h4>
+<div class="row"><label>Cadeiras <input type="text" id="itot" value="513" size="5" inputmode="numeric"></label><label>A favor <input type="text" id="isim" value="367" size="5" inputmode="numeric"></label><label>Contra <input type="text" id="inao" value="137" size="5" inputmode="numeric"></label><label>Abstenções <input type="text" id="iabs" value="7" size="5" inputmode="numeric"></label><label>Necessário <input type="text" id="iq" value="342" size="5" inputmode="numeric"></label><label>Resultado <select id="ires"><option value="a">Aprovado</option><option value="r">Rejeitado</option></select></label></div>
+<p class="help">Em "Resultado" escolha Aprovado ou Rejeitado: os votos "a favor" e "contra" se invertem sozinhos para bater com o resultado (dá para editar depois). Se rejeitado, o presidente fica no cargo e o vice não assume. Ausentes = o que sobrar. Ao mudar as cadeiras, o necessário vira 2/3 (editável). Aprovado se "a favor" ≥ necessário; aí o presidente é carimbado e o vice assume. Toque nas fotos para enviar imagens.</p>
+<h4>Cores</h4><div class="row"><label>A favor <input type="color" id="ik0" value="#3ddc84"></label><label>Contra <input type="color" id="ik1" value="#e5484d"></label><label>Abst. <input type="color" id="ik2" value="#f5c518"></label><label>Ausente <input type="color" id="ik3" value="#8a8f98"></label></div>
+<h4>Animação</h4><div class="row"><button id="ire" type="button">▶ Replay</button><button id="imp4" type="button">⬇ Salvar MP4</button><label>Duração <input type="range" id="idur" min="4" max="40" value="12"></label><label>Linha do tempo <input type="range" id="it" min="0" max="1000" value="0"></label></div></section>
 <div class="act"><button id="undo" type="button">Desfazer</button><button id="exp" type="button">Gerar imagem (PNG)</button></div>
 <div id="tip"></div>
 
@@ -378,7 +498,7 @@ document.addEventListener('click',function(e){
   var el=e.target.closest('.slot');if(!el)return;
   var i=document.createElement('input');i.type='file';i.accept='image/*';
   i.onchange=function(){var f=i.files[0];if(!f)return;var r=new FileReader();
-    r.onload=function(){el.style.backgroundImage='url("'+r.result+'")';el.classList.add('has')};
+    r.onload=function(){el.style.backgroundImage='url("'+r.result+'")';el.classList.add('has');el.dataset.adj='';el.dataset.nat='';el.style.backgroundSize='';el.style.backgroundPosition='';if(window.__sel)window.__sel(el)};
     r.readAsDataURL(f)};
   i.click();
 });
@@ -409,7 +529,7 @@ var D=[["BRRS","Rio Grande do Sul","M451.8 716.4l0 0.1 0.2 0 0.2-0.1 0.1-0.1 0.2
 var NS='http://www.w3.org/2000/svg',$=function(i){return document.getElementById(i)};
 var BR={a:'#c8102e',b:'#e6007e',c:'#1f5fbf',d:'#f5c518',e:'#e8761c',n:'#6f8a76'};
 var REG={Norte:'AC AM AP PA RO RR TO',Nordeste:'AL BA CE MA PB PE PI RN SE','Centro-Oeste':'DF GO MS MT',Sudeste:'ES MG RJ SP',Sul:'PR RS SC'};
-var IDS=['cBg','cA','cB','cH','fh','fb','bgOp','bc','bw','ls','lm'];
+var IDS=['cBg','cA','cB','cH','fh','fb','bgOp','bc','bw','ls','lm','itot','isim','inao','iabs','iq','ik0','ik1','ik2','ik3','idur'];
 var brush='a',sel=null,maps=[],hist=[],mode='sigla',paint=false,drag=null,mdrag=null,cur=null,tip=$('tip'),N={},bi={};
 D.forEach(function(r){N[r[0]]=r});
 function sg(i){return i.slice(2)}
@@ -470,7 +590,7 @@ function dots(){[].forEach.call(document.querySelectorAll('.bt'),function(b){var
 ['cA','cB'].forEach(function(id){$(id).addEventListener('input',function(){BR[id=='cA'?'a':'b']=this.value;dots();renderAll()})});
 BR.a=$('cA').value;BR.b=$('cB').value;
 
-maps=[mk($('m1'),300,1),mk($('m2'),150,.7)];cur=maps[0];
+maps=[mk($('m1'),300,1)];cur=maps[0];
 maps.forEach(function(m){m.base={l:m.el.offsetLeft,t:m.el.offsetTop,w:m.el.offsetWidth,h:m.el.offsetHeight}});
 function lay(M){var b=M.base,w=b.w*M.s,h=b.h*M.s,e=M.el;e.style.right='auto';e.style.bottom='auto';e.style.width=w+'px';e.style.height=h+'px';e.style.left=(b.l-(w-b.w)/2+M.x)+'px';e.style.top=(b.t-(h-b.h)/2+M.y)+'px';M.w=w;e.style.display=M.h?'none':'';render(M)}
 dots();renderAll();insp();
@@ -494,6 +614,7 @@ $('lm').onchange=function(){snap();var v=this.value;mode=v=='nome'?'nome':'sigla
 $('rg').onchange=function(){var v=REG[this.value];if(!v)return;snap();v.split(' ').forEach(function(c){if(brush!='sel')cur.st['BR'+c].k=brush});renderAll();this.value=''};
 $('fillAll').onclick=function(){if(brush=='sel')return;snap();D.forEach(function(r){cur.st[r[0]].k=brush});renderAll()};
 function undo(){var h=hist.pop();if(!h)return;var a=JSON.parse(h);maps.forEach(function(m,i){m.st=a[i]});renderAll();insp()}
+window.__swapMaps=function(){snap();maps.forEach(function(m){D.forEach(function(r){var q=m.st[r[0]];if(q.k=='a')q.k='b';else if(q.k=='b')q.k='a'})});renderAll()};
 $('undo').onclick=undo;
 document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key=='z'&&!e.target.isContentEditable&&e.target.tagName!='INPUT'){e.preventDefault();undo()}});
 $('iOn').onchange=function(){snap();sel.M.st[sel.id].on=this.checked;renderAll()};
@@ -506,8 +627,8 @@ document.addEventListener('click',function(e){var c=e.target.closest&&e.target.c
 /* salvar / abrir */
 function ed(){return [].filter.call(st.querySelectorAll('[contenteditable]'),function(e){return !e.closest('.co')})}
 $('save').onclick=function(){
-  var o={v:{},BR:BR,mode:mode,t:ed().map(function(e){return e.innerHTML}),i:[].map.call(st.querySelectorAll('.slot'),function(s){return s.style.backgroundImage}),m:maps.map(function(m){return m.st}),co:[].map.call(st.querySelectorAll('.co'),function(c){return c.outerHTML}),bg:$('bgimg').style.backgroundImage,mv:maps.map(function(m){return{s:m.s,x:m.x,y:m.y,h:m.h}}),tn:$('tn').value,k:['k1','k2','k3'].map(function(c){return $(c).checked})};
-  IDS.forEach(function(i){o.v[i]=$(i).value});
+  var o={v:{},BR:BR,mode:mode,t:ed().map(function(e){return e.innerHTML}),i:[].map.call(st.querySelectorAll('.slot'),function(s){return s.style.backgroundImage}),m:maps.map(function(m){return m.st}),co:[].map.call(st.querySelectorAll('.co'),function(c){return c.outerHTML}),bg:$('bgimg').style.backgroundImage,mv:maps.map(function(m){return{s:m.s,x:m.x,y:m.y,h:m.h}}),tn:$('tn').value,k:['k1','k2','k3'].map(function(c){return $(c).checked}),fa:[].map.call(st.querySelectorAll('.slot'),function(s){return s.dataset.adj||''})};
+  IDS.forEach(function(i){o.v[i]=$(i).value});if(window.__cs)o.g=window.__cs();if(window.__qs)o.q=window.__qs();
   var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(o)],{type:'application/json'}));a.download='projeto-eleicao.json';document.body.appendChild(a);a.click();a.remove();
 };
 $('open').onclick=function(){
@@ -518,10 +639,10 @@ $('open').onclick=function(){
     ['c','d','e','n'].forEach(function(k){BR[k]=o.BR[k];if(bi[k])bi[k].value=o.BR[k]});
     mode=o.mode;if(o.tn)$('tn').value=o.tn;if(o.k)o.k.forEach(function(v,j){$('k'+(j+1)).checked=v;mn[j].style.display=v?'':'none'});
     ed().forEach(function(e,j){if(o.t[j]!=null)e.innerHTML=o.t[j]});
-    st.querySelectorAll('.slot').forEach(function(s,j){var b=o.i[j]||'';s.style.backgroundImage=b;s.classList.toggle('has',!!b)});
+    st.querySelectorAll('.slot').forEach(function(s,j){var b=o.i[j]||'';s.style.backgroundImage=b;s.classList.toggle('has',!!b);s.dataset.adj=(o.fa&&o.fa[j])||'';s.dataset.nat='';s.style.backgroundSize='';s.style.backgroundPosition='';if(b&&s.dataset.adj&&window.__ap)window.__ap(s)});
     st.querySelectorAll('.co').forEach(function(c){c.remove()});
     o.co.forEach(function(h){st.querySelector('.mid').insertAdjacentHTML('beforeend',h)});
-    $('bgimg').style.backgroundImage=o.bg||'';
+    if(o.g&&window.__cl)window.__cl(o.g);if(o.q&&window.__ql)window.__ql(o.q);$('bgimg').style.backgroundImage=o.bg||'';
     maps.forEach(function(m,j){if(o.m[j])m.st=o.m[j];var v=o.mv&&o.mv[j];if(v){m.s=v.s;m.x=v.x;m.y=v.y;m.h=v.h;lay(m)}});
     sel=null;dots();renderAll();insp();
   };r.readAsText(i.files[0])};
@@ -530,6 +651,287 @@ $('open').onclick=function(){
 /* exportar sem destaque de seleção */
 var ex=$('exp');ex.addEventListener('pointerdown',function(){window.__ss=sel;sel=null;renderAll()});
 window.__restore=function(){sel=window.__ss||null;renderAll()};
+})();
+
+(function(){
+var $=function(i){return document.getElementById(i)},cl=function(x,a,b){return Math.max(a,Math.min(b,x))};
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function wrap(s,n){var w=s.split(' '),L=[''];w.forEach(function(x){var l=L[L.length-1];if(l&&(l+' '+x).length>n)L.push(x);else L[L.length-1]=l?l+' '+x:x});return L}
+function step(r){var a=[1,2,5,10,20,25,50,100,200,500,1000,5000,10000,100000];for(var i=0;i<a.length;i++)if(r/a[i]<=6)return a[i];return r/5}
+var C,G,K='2';
+var MS=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],PAL=['#ff0000','#2f66f0','#22c55e','#f5c518','#e8761c','#b04bff','#00bcd4','#ff69b4','#8bc34a','#795548','#9e9e9e','#ff9800'],TR={'-2':-20,'-1':-7,'0':0,'1':7,'2':20};
+var TRO='<option value="-2">Decair bastante</option><option value="-1">Decair um pouco</option><option value="0">Estável</option><option value="1">Subir um pouco</option><option value="2">Subir bastante</option><option value="c">Personalizado</option>';
+var SC={close:{a:[50,50.4],vol:4,pace:'lin'},down:{a:[52,38],vol:2,pace:'smooth'},up:{a:[40,58],vol:2,pace:'smooth'},flip:{a:[44,51.3],vol:1.5,pace:'late'},flat:{a:[50,50],vol:1,pace:'lin'}};
+var dil=[37.5,38.4,38.1,39.5,40.7,40,41.3,42.4,41.7,43.6,44.7,44,45.8,47.2,46.6,48.7,49.8,50.9,51.3,50.13];
+var qa=function(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')},pf=function(x){return parseFloat(String(x).replace(',','.'))||0};
+function mkS(n,c,a,tr,b){return{n:n,c:c,a:a,tr:tr,b:b,from:0,to:null}}
+function W(s,n){var a=s&&s.from?cl(+s.from,0,n-1):0,b=(!s||s.to==null||s.to==='')?n-1:cl(+s.to,0,n-1);return[a,Math.max(a,b)]}
+function base(o){return Object.assign({t:1,play:false,dur:12,mode:'scores',kind:'d',s:'2014-10-05',e:'2014-10-24',step:1,fmt:'dm',ms:0,me:9,vol:1.5,pace:'smooth',seed:7,comp:false,manual:false,d:[],v:[],names:[],cols:[],rk:[],ser:[]},o)}
+function lab(o){var L=[],i;if(o.kind=='m'){for(i=o.ms;i<=o.me;i++)L.push(MS[i]);return L.length?L:['']}
+ var a=Date.parse(o.s),b=Date.parse(o.e);if(isNaN(a)||isNaN(b)||b<a)return[''];
+ for(var q=a;q<=b&&L.length<150;q+=o.step*864e5){var d=new Date(q),D=('0'+d.getUTCDate()).slice(-2),m=('0'+(d.getUTCMonth()+1)).slice(-2);
+  L.push(o.fmt=='ext'?d.getUTCDate()+' '+MS[d.getUTCMonth()].toLowerCase():o.fmt=='dmy'?D+'/'+m+'/'+d.getUTCFullYear():D+'/'+m)}
+ return L}
+function gen(o,n){var ea={lin:function(x){return x},early:function(x){return 1-(1-x)*(1-x)},late:function(x){return x*x},smooth:function(x){return x*x*(3-2*x)}}[o.pace]||function(x){return x};
+ o.v=o.ser.map(function(s,k){if(s.tr!='c')s.b=+cl(s.a+TR[s.tr],0,100).toFixed(2);
+  var ww=W(s,n),i0=ww[0],m=ww[1]-ww[0]+1,r=rng(o.seed+k*977),w=[0],i,mx=1e-9;for(i=1;i<m;i++)w.push(w[i-1]+r()-.5);
+  for(i=0;i<m;i++){w[i]-=w[m-1]*i/Math.max(1,m-1);mx=Math.max(mx,Math.abs(w[i]))}
+  return Array.from({length:n},function(_,i){var j=cl(i-i0,0,m-1),q=m>1?j/(m-1):1;return +cl(s.a+(s.b-s.a)*ea(q)+w[j]/mx*o.vol,0,100).toFixed(2)})});
+ if(o.comp&&o.ser.length==2){o.v[1]=o.v[0].map(function(x){return +(100-x).toFixed(2)});o.ser[1].a=+(100-o.ser[0].a).toFixed(2);o.ser[1].b=+(100-o.ser[0].b).toFixed(2);o.ser[1].tr='c'}}
+function rsm(a,n){if(a.length==n||a.length<2)return a.length==n?a:Array(n).fill(a[0]);return Array.from({length:n},function(_,i){var p=n>1?i*(a.length-1)/(n-1):0,j=Math.min(a.length-2,Math.floor(p));return +(a[j]+(a[j+1]-a[j])*(p-j)).toFixed(2)})}
+function rebuild(){var L=lab(C),n=L.length;C.d=L;if(C.manual&&C.v.length==C.ser.length)C.v=C.v.map(function(a){return rsm(a,n)});else{C.manual=false;gen(C,n)}}
+function recalc(){C.names=C.ser.map(function(s){return s.n});C.cols=C.ser.map(function(s){return s.c});var n=C.d.length;C.rk=C.v.map(function(a){return a.map(function(x,i){return 1+C.v.filter(function(b,t){var w=W(C.ser[t],n);return i>=w[0]&&i<=w[1]&&b[i]>x}).length})})}
+function csv(){$('gcsv').value=['data'].concat(C.names).join(';')+'\n'+C.d.map(function(d,i){return d+';'+C.v.map(function(a){return a[i]}).join(';')}).join('\n')}
+function tb(){var h='<table><tr><th></th>'+C.ser.map(function(s){return'<th style="color:'+s.c+'">'+esc(s.n)+'</th>'}).join('')+'</tr>';
+ C.d.forEach(function(d,i){h+='<tr><td><input data-i="'+i+'" data-s="-1" value="'+qa(d)+'"></td>'+C.v.map(function(a,s){var w=W(C.ser[s],C.d.length);return'<td><input data-i="'+i+'" data-s="'+s+'" inputmode="decimal" value="'+a[i]+'"'+(i>=w[0]&&i<=w[1]?'':' style="opacity:.35"')+'></td>'}).join('')+'</tr>'});
+ $('gtb').innerHTML=h+'</table>'}
+function dopt(w){var n=C.d.length,h,i;if(w=='from'){h='<option value="0">desde o início</option>';for(i=1;i<n;i++)h+='<option value="'+i+'">'+esc(C.d[i])+'</option>'}else{h='<option value="">até o fim</option>';for(i=0;i<n-1;i++)h+='<option value="'+i+'">'+esc(C.d[i])+'</option>'}return h}
+function rows(){var h='';C.ser.forEach(function(s,k){h+='<div class="row sr" data-k="'+k+'"><input type="color" data-f="c" value="'+s.c+'"><input type="text" data-f="n" value="'+qa(s.n)+'" placeholder="Nome do político"><label>Começa <input type="text" data-f="a" size="4" inputmode="decimal" value="'+s.a+'"></label><select data-f="tr">'+TRO+'</select><label>Termina <input type="text" data-f="b" size="4" inputmode="decimal" value="'+s.b+'"></label>'+'<label>Aparece em <select data-f="from">'+dopt('from')+'</select></label><label>Sai em <select data-f="to">'+dopt('to')+'</select></label>'+(C.ser.length>1?'<button type="button" data-f="x">×</button>':'')+'</div>'});
+ $('gser').innerHTML=h;[].forEach.call($('gser').querySelectorAll('.sr'),function(r,k){var s=C.ser[k],w=W(s,C.d.length);
+  r.querySelector('[data-f=tr]').value=s.tr;r.querySelector('[data-f=from]').value=w[0];r.querySelector('[data-f=to]').value=(s.to==null||w[1]>=C.d.length-1)?'':w[1]})}
+var FM={gkind:'kind',gs:'s',ge:'e',gst:'step',gf:'fmt',gms:'ms',gme:'me',gpace:'pace'};
+function bsel(){var o=$('gbo'),d=$('gbd'),ov=o.value,dv=d.value,n=C.d.length;
+ o.innerHTML=C.ser.map(function(s,k){return'<option value="'+k+'">'+esc(s.n)+'</option>'}).join('');
+ d.innerHTML=C.d.slice(0,Math.max(0,n-1)).map(function(x,i){return'<option value="'+i+'">'+esc(x)+'</option>'}).join('');
+ o.value=ov;if(!o.value)o.value='0';if(dv)d.value=dv;if(!d.value&&d.options.length)d.value=String(Math.floor(d.options.length/2));
+ if(!$('gbc').dataset.u)$('gbc').value=PAL[C.ser.length%PAL.length]}
+$('gbc').addEventListener('input',function(){this.dataset.u=1});
+$('gbap').onclick=function(){var a=+$('gbo').value,i=+$('gbd').value,n=C.d.length,nome=$('gbn').value.trim();
+ if(isNaN(i)||n<2){alert('Escolha o último dia do barrado.');return}
+ if(!nome){alert('Digite o nome do novo candidato.');return}
+ var va=cl(pf($('gba').value),0,100),vb=cl(pf($('gbb').value),0,100),f=Math.min(n-1,i+1);
+ C.comp=false;var A=C.ser[a];if((A.from||0)>i)A.from=0;A.to=i;
+ var B=mkS(nome,$('gbc').value,va,'c',vb);B.from=f;B.to=null;C.ser.push(B);
+ if(C.manual){C.v.push(Array.from({length:n},function(_,j){var q=n-1>f?cl((j-f)/(n-1-f),0,1):1;return +(va+(vb-va)*q*q*(3-2*q)).toFixed(2)}));recalc();ui();C.t=1;C.play=false;drawC()}else upd(true);
+ $('gbn').value='';playC()};
+$('gbcl').onclick=function(){C.ser.forEach(function(s){s.from=0;s.to=null});if(C.manual){recalc();ui();C.t=1;C.play=false;drawC()}else upd(true)};
+function ui(){Object.keys(FM).forEach(function(i){$(i).value=C[FM[i]]});$('gvol').value=C.vol;$('gcomp').checked=C.comp;$('gdur').value=C.dur;$('gttl').value=$('gtt').textContent;
+ $('gdw').style.display=C.kind=='d'?'':'none';$('gmw').style.display=C.kind=='m'?'':'none';
+ $('gk1').classList.toggle('on',K=='1');$('gk2').classList.toggle('on',K=='2');$('gsc').classList.toggle('on',C.mode=='scores');$('grk').classList.toggle('on',C.mode=='ranks');rows();tb();csv();bsel()}
+function upd(g){if(g)C.manual=false;rebuild();recalc();ui();C.t=1;C.play=false;drawC()}
+function sw(k){if(C)C.title=$('gtt').innerHTML;K=k;C=G[k];C.play=false;C.t=1;$('gtt').innerHTML=C.title;recalc();ui();drawC()}
+function init(){G={'1':base({title:'Primeiro turno 2014 · pesquisas',kind:'m',vol:1.2,ser:[mkS('Dilma Rousseff (PT)',PAL[0],44,'c',41.6),mkS('Aécio Neves (PSDB)',PAL[1],17,'c',33.6),mkS('Marina Silva (PSB)',PAL[2],9,'c',21.3)]}),
+ '2':base({title:'Segundo turno 2014 · pesquisas',manual:true,comp:true,ser:[mkS('Dilma Rousseff (PT)',PAL[0],37.5,'c',50.13),mkS('Aécio Neves (PSDB)',PAL[1],62.5,'c',49.87)],v:[dil,dil.map(function(x){return +(100-x).toFixed(2)})]})};
+ Object.keys(G).forEach(function(k){C=G[k];rebuild();recalc()});C=null;sw('2')}
+Object.keys(FM).forEach(function(i){$(i).onchange=function(){var k=FM[i];C[k]=/^(step|ms|me)$/.test(k)?+this.value:this.value;if(k=='pace')upd(true);else{if(k=='ms'&&C.me<C.ms)C.me=C.ms;if(k=='me'&&C.me<C.ms)C.ms=C.me;upd()}}});
+MS.forEach(function(m,i){['gms','gme'].forEach(function(s){var o=document.createElement('option');o.value=i;o.textContent=m;$(s).appendChild(o)})});
+$('gvol').onchange=function(){C.vol=+this.value;upd(true)};
+$('gcomp').onchange=function(){C.comp=this.checked;upd(true)};
+$('gseed').onclick=function(){C.seed=Math.floor(Math.random()*1e6);upd(true)};
+$('gscn').onchange=function(){var s=SC[this.value];this.value='';if(!s)return;C.vol=s.vol;C.pace=s.pace;C.ser.slice(0,2).forEach(function(r,k){r.a=k?+(100-s.a[0]).toFixed(2):s.a[0];r.b=k?+(100-s.a[1]).toFixed(2):s.a[1];r.tr='c'});C.comp=C.ser.length==2;upd(true)};
+$('gadd').onclick=function(){C.comp=false;C.ser.push(mkS('Novo político',PAL[C.ser.length%PAL.length],10,'0',10));if(C.manual)C.v.push(Array(C.d.length).fill(10));upd()};
+$('gser').addEventListener('input',function(e){var f=e.target.dataset.f,s=C.ser[+e.target.closest('.sr').dataset.k];if(f=='c'||f=='n'){s[f]=e.target.value;recalc();csv();drawC()}});
+$('gser').addEventListener('change',function(e){var f=e.target.dataset.f,k=+e.target.closest('.sr').dataset.k,s=C.ser[k];if(f=='a')s.a=cl(pf(e.target.value),0,100);else if(f=='b'){s.b=cl(pf(e.target.value),0,100);s.tr='c'}else if(f=='tr')s.tr=e.target.value;
+ else if(f=='from'||f=='to'){s[f]=(f=='to'&&e.target.value==='')?null:+e.target.value;if(C.manual){recalc();ui();C.t=1;C.play=false;drawC();return}}
+ else{tb();return}upd(true)});
+$('gser').addEventListener('click',function(e){if(e.target.dataset.f!='x')return;var k=+e.target.closest('.sr').dataset.k;C.ser.splice(k,1);if(C.manual)C.v.splice(k,1);C.comp=false;upd()});
+$('gtb').addEventListener('input',function(e){var t=e.target,i=+t.dataset.i,s=+t.dataset.s;if(s<0)C.d[i]=t.value;else{C.v[s][i]=cl(pf(t.value),0,100);C.manual=true;
+ if(C.comp&&C.ser.length==2&&s==0){C.v[1][i]=+(100-C.v[0][i]).toFixed(2);$('gtb').querySelector('[data-i="'+i+'"][data-s="1"]').value=C.v[1][i]}}
+ recalc();csv();C.t=1;C.play=false;drawC()});
+$('gcsv').onchange=function(){var L=this.value.trim().split(/\r?\n/),sep=L[0].indexOf(';')>-1?';':L[0].indexOf('\t')>-1?'\t':',',nm=L[0].split(sep).slice(1).map(function(x){return x.trim()});
+ var d=[],v=nm.map(function(){return[]});L.slice(1).forEach(function(l){var c=l.split(sep);if(c.length<2)return;d.push(c[0].trim());nm.forEach(function(_,s){v[s].push(pf(c[s+1]))})});
+ C.ser=nm.map(function(n,s){var o=C.ser[s]||mkS(n,PAL[s%PAL.length],0,'c',0);o.n=n;o.a=v[s][0]||0;o.b=v[s][v[s].length-1]||0;o.tr='c';return o});C.d=d;C.v=v;C.manual=true;C.comp=false;recalc();ui();C.t=1;C.play=false;drawC()};
+$('gk1').onclick=function(){sw('1')};$('gk2').onclick=function(){sw('2')};
+$('gttl').oninput=function(){$('gtt').textContent=this.value;C.title=this.value};
+$('gtt').addEventListener('input',function(){C.title=this.innerHTML;$('gttl').value=this.textContent});
+window.__cs=function(){C.title=$('gtt').innerHTML;return{k:K,G:G}};
+window.__cl=function(o){G=o.G;C=null;Object.keys(G).forEach(function(k){G[k].play=false});sw(o.k)};
+/* ---- MP4 ---- */
+var slp=function(ms){return new Promise(function(r){setTimeout(r,ms)})};
+async function frameC(cx){var s=$('cs').cloneNode(true);s.setAttribute('xmlns','http://www.w3.org/2000/svg');s.setAttribute('width',960);s.setAttribute('height',540);s.setAttribute('font-family','Courier New,monospace');s.setAttribute('font-weight','700');s.setAttribute('font-size','13');
+ var im=new Image();im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(s));await im.decode();
+ cx.fillStyle='#212328';cx.fillRect(0,0,960,544);cx.drawImage(im,0,0);cx.fillStyle='#fff';cx.font='700 15px "Courier New",monospace';cx.textAlign='right';cx.fillText($('gtt').textContent,944,26)}
+async function frameI(cx){var c=await html2canvas(st,{scale:1,backgroundColor:null,useCORS:true,width:960,height:540});cx.fillStyle='#000';cx.fillRect(0,0,960,544);cx.drawImage(c,0,0,960,540)}
+async function mp4(kind,btn){
+ if(!window.VideoEncoder||!window.Mp4Muxer){alert('Este navegador não consegue salvar MP4 (use Chrome, Edge ou Safari atualizado, com internet ligada).');return}
+ var W=960,H=544,fps=kind=='c'?30:15,o=kind=='c'?C:P,N=Math.round((o.dur+2)*fps),cv=document.createElement('canvas'),cx=cv.getContext('2d'),txt=btn.textContent,cfg=null,err=null;
+ cv.width=W;cv.height=H;
+ for(var q of['avc1.640028','avc1.4d0028','avc1.42001f']){if(cfg)break;var c={codec:q,width:W,height:H,bitrate:5e6,framerate:fps,avc:{format:'avc'}};try{if((await VideoEncoder.isConfigSupported(c)).supported)cfg=c}catch(e){}}
+ if(!cfg){alert('Este navegador não tem codificador H.264.');return}
+ var mx=new Mp4Muxer.Muxer({target:new Mp4Muxer.ArrayBufferTarget(),video:{codec:'avc',width:W,height:H},fastStart:'in-memory',firstTimestampBehavior:'offset'}),enc=new VideoEncoder({output:function(ch,m){mx.addVideoChunk(ch,m)},error:function(e){err=e}}),old=st.style.transform;
+ enc.configure(cfg);o.play=false;st.style.transform='none';st.classList.add('norec');
+ try{for(var f=0;f<N;f++){o.t=Math.min(1,f/(fps*o.dur));
+   if(kind=='c'){drawC();await frameC(cx)}else{drawP();await frameI(cx)}
+   var vf=new VideoFrame(cv,{timestamp:Math.round(f*1e6/fps),duration:Math.round(1e6/fps)});enc.encode(vf,{keyFrame:f%(fps*2)==0});vf.close();
+   while(enc.encodeQueueSize>4)await slp(5);if(err)throw err;btn.textContent='Gravando '+Math.round(f/N*100)+'%';await slp(0)}
+  await enc.flush();mx.finalize();
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([mx.target.buffer],{type:'video/mp4'}));a.download=(kind=='c'?'grafico':'impeachment')+'.mp4';document.body.appendChild(a);a.click();a.remove();
+ }catch(e){alert('Falha ao gerar o MP4: '+(e.message||e))}
+ finally{st.style.transform=old;st.classList.remove('norec');o.t=1;kind=='c'?drawC():drawP();btn.textContent=txt}}
+function drawC(){var n=C.d.length,S=C.names.length,svg=$('cs');if(n<2||!S){svg.innerHTML='';return}
+ var p=C.t*(n-1),i0=Math.min(n-2,Math.floor(p)),f=p-i0,L=78,R=740,T=118,B=512,rk=C.mode=='ranks',src=rk?C.rk:C.v,mn,mx,st,H='';
+ if(rk){mn=.5;mx=S+.5;st=1}else{var all=[];C.v.forEach(function(a,s){var w=W(C.ser[s],n);a.forEach(function(x,i){if(i>=w[0]&&i<=w[1])all.push(x)})});mx=Math.max.apply(0,all);mn=$('gz').checked?0:Math.min.apply(0,all);st=step(mx-mn||1);if(!$('gz').checked)mn=Math.floor(mn/st)*st;mx=Math.ceil(mx/st)*st;if(mx==mn)mx=mn+st}
+ var X=function(i){return L+i/(n-1)*(R-L)},Y=function(v){var r=(v-mn)/(mx-mn);return rk?T+r*(B-T):B-r*(B-T)};
+ for(var v=rk?1:Math.ceil(mn/st)*st;v<=(rk?S:mx)+1e-9;v+=st){var y=Y(v);H+='<line x1="'+L+'" x2="'+R+'" y1="'+y+'" y2="'+y+'" stroke="#3a3d44"/><text x="'+(L-10)+'" y="'+(y+4)+'" text-anchor="end" fill="#fff">'+(rk?'#':'')+(+v.toFixed(2))+'</text>'}
+ var k=Math.ceil(n/10);H+='<line x1="'+L+'" x2="'+R+'" y1="'+T+'" y2="'+T+'" stroke="#fff"/><line x1="'+L+'" x2="'+L+'" y1="'+T+'" y2="'+B+'" stroke="#fff"/>';
+ C.d.forEach(function(d,i){if(i%k)return;H+='<line x1="'+X(i)+'" x2="'+X(i)+'" y1="'+(T-6)+'" y2="'+T+'" stroke="#fff"/><text transform="translate('+(X(i)-2)+','+(T-12)+') rotate(-45)" fill="#fff">'+esc(d)+'</text>'});
+ H+='<text x="'+R+'" y="'+(B-12)+'" text-anchor="end" font-size="46" fill="#fff" opacity=".1">'+esc(C.d[Math.round(p)])+'</text>';
+ var labs=[],sv=function(s,j){var v=src[s][j];if(rk)return v;var w=W(C.ser[s],n);if(w[1]>=n-1)return v;var K=Math.max(3,Math.round((w[1]-w[0]+1)*.2)),q=(j-(w[1]-K))/K;if(q<=0)return v;q=Math.min(1,q);return +(v*(1-.92*q*q*(3-2*q))).toFixed(2)};
+ for(var s=0;s<S;s++){var ww=W(C.ser[s],n),a0=ww[0],bd=ww[1];var F=Math.max(.5,Math.min(1.5,n-1-bd)),al=(bd<n-1&&p>bd)?1-(p-bd)/F:1;if(p<a0||al<=0)continue;al=+al.toFixed(3);
+  var pe=Math.min(p,bd),ie=Math.min(n-2,Math.floor(pe)),fe=pe-ie,ended=false,pts=[];for(var j=a0;j<=ie;j++)pts.push(X(j)+','+Y(sv(s,j)));
+  var hx=X(ie)+(X(ie+1)-X(ie))*fe,hv=sv(s,ie)+(sv(s,ie+1)-sv(s,ie))*fe,hy=Y(hv);pts.push(hx+','+hy);
+  var d='M'+pts.join('L'),c=C.cols[s];
+  H+='<g opacity="'+al+'"><path d="'+d+'" fill="none" stroke="'+c+'" stroke-opacity=".18" stroke-width="11" stroke-linejoin="round"/><path d="'+d+'" fill="none" stroke="'+c+'" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="'+hx+'" cy="'+hy+'" r="'+(ended?5:C.t>=1?8:5)+'" fill="'+c+'"/></g>';
+  if(ended)H+='<path d="M'+(hx-9)+','+(hy-9)+'L'+(hx+9)+','+(hy+9)+'M'+(hx+9)+','+(hy-9)+'L'+(hx-9)+','+(hy+9)+'" stroke="#ff2d3d" stroke-width="4" stroke-linecap="round"/>';
+  labs.push({s:s,x:hx,y:hy,a:al,e:ended,L:wrap(C.names[s]+' '+(rk?'#'+Math.round(hv):hv.toFixed(2)),16)})}
+ [labs.filter(function(l){return!l.e}),labs.filter(function(l){return l.e})].forEach(function(g){g.sort(function(a,b){return a.y-b.y});var last=-1e9;
+ g.forEach(function(l){var h=l.L.length*14,top=Math.max(l.y-h/2,last+6);l.top=top;last=top+h;
+  H+='<text fill="'+C.cols[l.s]+'" opacity="'+l.a+'" font-size="13">'+l.L.map(function(t,i){return'<tspan x="'+(l.x+16)+'" y="'+(top+11+i*14)+'">'+esc(t)+'</tspan>'}).join('')+'</text>'});});
+ svg.innerHTML=H;$('gt').value=Math.round(C.t*1000)}
+$('gz').onchange=drawC;$('gmp4').onclick=function(){mp4('c',this)};
+$('gdur').oninput=function(){C.dur=+this.value};
+$('gt').oninput=function(){C.t=this.value/1000;C.play=false;drawC()};
+function playC(){C.t=0;C.play=true}
+$('gre').onclick=$('grp').onclick=playC;
+$('gsc').onclick=function(){C.mode='scores';this.classList.add('on');$('grk').classList.remove('on');drawC()};
+$('grk').onclick=function(){C.mode='ranks';this.classList.add('on');$('gsc').classList.remove('on');drawC()};
+
+var P={t:0,play:false,dur:12,seat:[],ord:[],cat:[],el:[]};
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var num=function(i){return Math.max(0,parseInt($(i).value)||0)};
+function buildP(){var tot=Math.max(1,num('itot')),R=Math.max(3,Math.round(Math.sqrt(tot/4))),ro=200,ri=ro*.42,dr=(ro-ri)/(R-1),rs=[],sum=0,k,j;
+ for(k=0;k<R;k++){rs.push(ri+k*dr);sum+=rs[k]}
+ var cnt=rs.map(function(r){return Math.max(2,Math.round(tot*r/sum))}),diff=tot-cnt.reduce(function(a,b){return a+b},0);
+ for(k=R-1;diff!=0;k=(k+R-1)%R){if(diff>0){cnt[k]++;diff--}else if(cnt[k]>2){cnt[k]--;diff++}}
+ var seats=[];for(k=0;k<R;k++)for(j=0;j<cnt[k];j++){var a=Math.PI*(1-j/(cnt[k]-1));seats.push({a:a,r:rs[k],x:210+rs[k]*Math.cos(a),y:215-rs[k]*Math.sin(a)})}
+ seats.sort(function(a,b){return b.a-a.a||a.r-b.r});
+ var sp=Math.PI*ro/(cnt[R-1]-1),rad=Math.min(dr,sp)*.42,sim=num('isim'),nao=num('inao'),ab=num('iabs');
+ P.cat=seats.map(function(_,i){return i<sim?0:i<sim+ab?2:i<sim+ab+Math.max(0,tot-sim-nao-ab)?3:1});
+ var rnd=rng(7);P.ord=seats.map(function(_,i){return i});for(var i=P.ord.length-1;i>0;i--){var q=Math.floor(rnd()*(i+1)),t=P.ord[i];P.ord[i]=P.ord[q];P.ord[q]=t}
+ P.seat=seats;P.tot=tot;P.rad=rad;
+ $('isv').innerHTML=seats.map(function(s){return'<circle cx="'+s.x.toFixed(1)+'" cy="'+s.y.toFixed(1)+'" r="'+rad.toFixed(2)+'" fill="#ffffff2a"/>'}).join('')+'<text id="ibig" x="210" y="196" text-anchor="middle" font-size="40" font-weight="800" fill="#fff" font-family="var(--fh)">0</text><text id="iqt" x="210" y="214" text-anchor="middle" font-size="9" font-weight="800" fill="#fff"></text>';
+ P.el=[].slice.call($('isv').querySelectorAll('circle'));drawP()}
+function drawP(){var k=Math.floor(cl((P.t-.08)/.72,0,1)*P.tot+1e-9),cnt=[0,0,0,0],r,cols=[0,1,2,3].map(function(i){return $('ik'+i).value});
+ P.el.forEach(function(e){e.setAttribute('fill','#ffffff2a')});
+ for(r=0;r<k;r++){var i=P.ord[r];cnt[P.cat[i]]++;P.el[i].setAttribute('fill',cols[P.cat[i]])}
+ for(r=0;r<4;r++){$('ic'+r).textContent=cnt[r];$('lc'+r).style.background=cols[r]}
+ var q=num('iq'),ok=num('isim')>=q;$('ibig').textContent=cnt[0];$('ibig').setAttribute('fill',cols[0]);$('iqt').textContent='NECESSÁRIO: '+q;
+ var b=$('ib');b.style.opacity=P.t>=.8?1:0;b.textContent=ok?'IMPEACHMENT APROVADO':'IMPEACHMENT REJEITADO';b.style.color=ok?cols[0]:cols[1];
+ $('ist').style.opacity=ok&&P.t>=.82?1:0;$('ires').value=ok?'a':'r';var s2=$('ist2');s2.style.opacity=!ok&&P.t>=.82?1:0;s2.style.color=s2.style.borderColor=cols[0];$('ivp').classList.toggle('on',ok&&P.t>=.9||(!ok&&false));$('it').value=Math.round(P.t*1000)}
+['itot','isim','inao','iabs'].forEach(function(i){$(i).oninput=function(){if(i=='itot')$('iq').value=Math.ceil(num('itot')*2/3);buildP()}});
+$('iq').oninput=drawP;[0,1,2,3].forEach(function(i){$('ik'+i).oninput=drawP});
+$('idur').oninput=function(){P.dur=+this.value};
+$('ires').onchange=function(){var q=num('iq'),want=this.value=='a',ok=num('isim')>=q;
+ if(want!=ok){var t=$('isim').value;$('isim').value=$('inao').value;$('inao').value=t;
+  if(want&&num('isim')<q)$('isim').value=q;else if(!want&&num('isim')>=q)$('isim').value=Math.max(0,q-1)}
+ buildP();P.t=1;P.play=false;drawP()};
+$('it').oninput=function(){P.t=this.value/1000;P.play=false;drawP()};
+function playI(){P.t=0;P.play=true}$('ire').onclick=playI;$('imp4').onclick=function(){mp4('i',this)};
+
+window.tab=function(n){for(var i=1;i<=4;i++){$('s'+i).classList.toggle('show',n==i);$('t'+i).classList.toggle('on',n==i)}
+ $('mp').style.display=n==1?'':'none';document.body.dataset.t=n;showP(n==1?'mp':n==3?'pg':n==4?'pi':'pa');
+ C.play=P.play=false;if(n==3)playC();if(n==4){playI()}};
+for(var i=1;i<=4;i++)(function(i){$('t'+i).onclick=function(){window.tab(i)}})(i);
+var last=0;(function loop(ts){var dt=Math.min(.1,(ts-last)/1000);last=ts;
+ if(C&&C.play){C.t=Math.min(1,C.t+dt/C.dur);if(C.t>=1)C.play=false;drawC()}
+ if(P.play){P.t=Math.min(1,P.t+dt/P.dur);if(P.t>=1)P.play=false;drawP()}
+ requestAnimationFrame(loop)})(0);
+init();buildP();C.t=1;drawC();P.t=1;drawP();
+})();
+
+(function(){
+var $=function(i){return document.getElementById(i)},list=[],cur=null;
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function dims(el){var sc=el.closest('.scr'),on=sc.classList.contains('show');if(!on){sc.style.visibility='hidden';sc.classList.add('show')}var r=[el.offsetWidth,el.offsetHeight];if(!on){sc.classList.remove('show');sc.style.visibility=''}return r}
+function ap(el){var u=/url\(["']?(.*?)["']?\)$/.exec(el.style.backgroundImage||'');if(!u)return;
+ var m=(el.dataset.adj||'50,50,100').split(',').map(Number),z=m[2]||100;
+ el.style.backgroundPosition=m[0]+'% '+m[1]+'%';
+ if(z<=100){el.style.backgroundSize='';return}
+ function go(n){var d=dims(el);if(!d[0]||!d[1])return;var c=Math.max(d[0]/n[0],d[1]/n[1]);el.style.backgroundSize=(n[0]*c*z/100)+'px '+(n[1]*c*z/100)+'px'}
+ var n=(el.dataset.nat||'').split(',').map(Number);
+ if(n.length==2&&n[0]>0){go(n);return}
+ var im=new Image();im.onload=function(){el.dataset.nat=im.naturalWidth+','+im.naturalHeight;go([im.naturalWidth,im.naturalHeight])};im.src=u[1]}
+window.__ap=ap;
+function nm(e){var t=function(q){var x=q&&q.querySelector('.nm');return x?x.textContent.trim():''},p;
+ if(e.id=='ph1')return t(e.closest('.pl'))||'Presidente derrubado';
+ if(e.id=='ph2')return t(e.closest('.pr'))||'Vice';
+ if(e.closest('.cand'))return t(e.closest('.cand'))||'Candidato';
+ if(p=e.closest('.mn'))return(p.querySelector('.box').firstChild.textContent||'').trim()||'Candidato menor';
+ if(e.closest('.inc'))return'Titular (círculo)';
+ if(e.closest('.gl'))return t(e.closest('.gl'))||'Presidente';
+ return'Foto'}
+function pick(i){cur=list[i]||null;var m=cur?(cur.dataset.adj||'50,50,100').split(',').map(Number):[50,50,100];$('fx').value=m[0];$('fy').value=m[1];$('fz').value=m[2]||100}
+function fill(){var sc=document.querySelector('.scr.show');
+ list=[].filter.call(sc.querySelectorAll('.slot'),function(e){return!e.matches('.logo,.ml,.flag,.brasil')&&e.offsetWidth>0});
+ $('fs').innerHTML=list.map(function(e,i){return'<option value="'+i+'">'+esc(nm(e)+(e.classList.contains('has')?'':' (sem imagem)'))+'</option>'}).join('');
+ if(!list.length){cur=null;return}
+ var i=list.indexOf(cur);if(i<0)i=0;$('fs').value=i;pick(i)}
+function set(){if(!cur)return;cur.dataset.adj=[$('fx').value,$('fy').value,$('fz').value].join(',');ap(cur)}
+['fx','fy','fz'].forEach(function(i){$(i).oninput=set});
+$('fs').onchange=function(){pick(+this.value)};
+$('fr').onclick=function(){$('fx').value=50;$('fy').value=50;$('fz').value=100;set()};
+document.querySelector('#pt [data-p=pf]').addEventListener('click',fill);
+window.__sel=function(el){if(!$('pf').classList.contains('show'))return;fill();var i=list.indexOf(el);if(i>-1){$('fs').value=i;pick(i)}};
+})();
+
+document.getElementById('swp').onclick=function(){var g=function(i){return document.getElementById(i)},a=g('c1'),b=g('c2'),t=a.innerHTML;a.innerHTML=b.innerHTML;b.innerHTML=t;
+ var x=g('cA'),y=g('cB'),v=x.value;x.value=y.value;y.value=v;x.dispatchEvent(new Event('input'));y.dispatchEvent(new Event('input'));
+ if(window.__swapMaps)window.__swapMaps()};
+
+(function(){
+var $=function(i){return document.getElementById(i)},st=$('stage'),
+ pf=function(x){return parseFloat(String(x).replace(',','.'))||0},
+ cl=function(x,a,b){return Math.max(a,Math.min(b,x))},
+ esc=function(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;')},
+ qa=function(t){return esc(t).replace(/"/g,'&quot;')},
+ PAL=['#2e9e4a','#2b8fd0','#e3262e','#f5e50a','#f07a12','#b04bff','#00bcd4','#ff69b4','#8bc34a','#9e9e9e'];
+var Q={type:'bar',vals:true,grid:true,dec:0,pct:true,max:'',fs:0,sort:false,cats:['Nov','Dez','Jan','Fev'],ser:[
+ {n:'CANDIDATO A (PARTIDO)',c:PAL[0],v:[40,47,45,42]},{n:'CANDIDATO B (PARTIDO)',c:PAL[1],v:[30,24,27,30]},
+ {n:'CANDIDATA C (PARTIDO)',c:PAL[2],v:[15,19,17,12]},{n:'CANDIDATO D (PARTIDO)',c:PAL[3],v:[1,3,4,7]},{n:'CANDIDATO E (PARTIDO)',c:PAL[4],v:[3,2,1,2]}]};
+function stp(r){var a=[1,2,5,10,20,25,50,100,200,250,500,1000,2000,5000,10000,50000,100000];for(var i=0;i<a.length;i++)if(r/a[i]<=6)return a[i];return r/5}
+function axis(){var m=pf(Q.max);if(m>0)return{max:m,step:stp(m)};
+ var mx=1;Q.ser.forEach(function(s){s.v.forEach(function(x){mx=Math.max(mx,+x||0)})});
+ var p=stp(mx),a=Math.ceil(mx/p)*p;if(mx>a*.97)a+=p;return{max:a,step:p}}
+function fmt(v){return(+v).toFixed(+Q.dec).replace('.',',')+(Q.pct?'%':'')}
+function render(){var c=$('qc'),S=Q.ser,n=Q.cats.length,k=S.length;if(!n||!k){c.innerHTML='';return}
+ var fb=getComputedStyle(st).getPropertyValue('--fb')||'Arial',cx=document.createElement('canvas').getContext('2d');cx.font='800 15px '+fb;
+ var rows=[{it:[],w:0}];
+ S.forEach(function(s){var w=46+cx.measureText(String(s.n).toUpperCase()).width+String(s.n).length*.5,r=rows[rows.length-1];
+  if(r.it.length&&r.w+26+w>900)r=rows[rows.push({it:[],w:0})-1];
+  r.w+=(r.it.length?26:0)+w;r.it.push({s:s,w:w})});
+ var LH=30,legTop=528-rows.length*LH,L=66,R=926,T=124,B=Math.max(T+100,legTop-(Q.type=='line'?56:38)),ct=B+9,H='',X='',ax=axis(),mx=ax.max,
+  Y=function(v){return B-cl(v/mx,0,1)*(B-T)},gw=(R-L)/n,v,y,i,j;
+ if(Q.grid)for(v=0;v<=mx+1e-9;v+=ax.step){y=Y(v);
+  H+='<line x1="'+L+'" x2="'+R+'" y1="'+y+'" y2="'+y+'" stroke="rgba(255,255,255,'+(v?.2:.55)+')" stroke-width="'+(v?1.5:2)+'"/>';
+  X+='<div class="t r" style="left:6px;width:'+(L-18)+'px;top:'+(y-9)+'px;font-size:17px;font-weight:600">'+(+v.toFixed(2))+'</div>'}
+ else H+='<line x1="'+L+'" x2="'+R+'" y1="'+B+'" y2="'+B+'" stroke="rgba(255,255,255,.55)" stroke-width="2"/>';
+  if(Q.type=='bar'){var bw=Math.min(56,gw*.76/k-3),gW=k*bw+(k-1)*3,fv=+Q.fs||cl(bw*.52,11,22);
+  Q.cats.forEach(function(_,i){var ord=S.map(function(_,j){return j});if(Q.sort)ord.sort(function(a,b){return(+S[b].v[i]||0)-(+S[a].v[i]||0)});
+   ord.forEach(function(j,p){var v=+S[j].v[i]||0,x=L+gw*(i+.5)-gW/2+p*(bw+3),y=Y(v);
+    H+='<rect x="'+x+'" y="'+y+'" width="'+bw+'" height="'+(B-y)+'" rx="2" fill="'+S[j].c+'"/>';
+    if(Q.vals)X+='<div class="t" style="left:'+(x+bw/2-40)+'px;width:80px;top:'+(y-fv-5)+'px;font-size:'+fv+'px">'+fmt(v)+'</div>'})})
+ }else{var fl=+Q.fs||17;
+  S.forEach(function(s){H+='<polyline points="'+Q.cats.map(function(_,i){return(L+gw*(i+.5)).toFixed(1)+','+Y(+s.v[i]||0).toFixed(1)}).join(' ')+'" fill="none" stroke="'+s.c+'" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>'});
+  S.forEach(function(s){Q.cats.forEach(function(_,i){H+='<circle cx="'+(L+gw*(i+.5))+'" cy="'+Y(+s.v[i]||0)+'" r="6.5" fill="'+s.c+'"/>'})});
+  if(Q.vals)Q.cats.forEach(function(_,i){var P=S.map(function(s,j){return{j:j,v:+s.v[i]||0,y:Y(+s.v[i]||0)}});
+   P.forEach(function(p){p.dn=P.some(function(q){return q!==p&&(q.y<p.y-.01||(Math.abs(q.y-p.y)<.01&&q.j<p.j))&&p.y-q.y<fl+10})});
+   var last=-1e9;P.filter(function(p){return p.dn}).sort(function(a,b){return a.y-b.y}).forEach(function(p){p.t=Math.max(p.y+10,last+fl+2);last=p.t});
+   P.forEach(function(p){if(p.dn&&p.t+fl+4>B+9)ct=Math.max(ct,p.t+fl+4);X+='<div class="t" style="left:'+(L+gw*(i+.5)-40)+'px;width:80px;top:'+(p.dn?p.t:p.y-fl-11)+'px;font-size:'+fl+'px">'+fmt(p.v)+'</div>'})})}
+ Q.cats.forEach(function(t,i){X+='<div class="t" style="left:'+(L+gw*i)+'px;width:'+gw+'px;top:'+ct+'px;font-size:19px;font-weight:700">'+esc(t)+'</div>'});
+ rows.forEach(function(r,ri){var x=(960-r.w)/2,y=legTop+ri*LH;
+  r.it.forEach(function(it,ii){if(ii)x+=26;
+   H+='<path d="M'+(x+1.5)+','+(y+7.5)+'L'+(x+25)+','+(y+7.5)+'L'+(x+34.5)+','+(y+15)+'L'+(x+25)+','+(y+22.5)+'L'+(x+1.5)+','+(y+22.5)+'Z" fill="'+it.s.c+'" stroke="'+it.s.c+'" stroke-width="3" stroke-linejoin="round"/>';
+   X+='<div class="t l" style="left:'+(x+46)+'px;top:'+(y+7.5)+'px;width:'+(it.w-40)+'px;font-size:15px;letter-spacing:.5px;text-transform:uppercase">'+esc(it.s.n)+'</div>';
+   x+=it.w})});
+ c.innerHTML='<svg viewBox="0 0 960 540">'+H+'</svg>'+X}
+function tb(){var h='<table><tr><th></th>'+Q.ser.map(function(s,k){return'<th><input type="color" data-k="'+k+'" data-f="c" value="'+s.c+'"><input type="text" data-k="'+k+'" data-f="n" value="'+qa(s.n)+'">'+(Q.ser.length>1?'<button type="button" data-k="'+k+'" data-f="xs">×</button>':'')+'</th>'}).join('')+'<th></th></tr>';
+ Q.cats.forEach(function(c,i){h+='<tr><td><input type="text" data-i="'+i+'" data-f="cat" value="'+qa(c)+'"></td>'+Q.ser.map(function(s,k){return'<td><input type="text" inputmode="decimal" data-i="'+i+'" data-k="'+k+'" data-f="v" value="'+s.v[i]+'"></td>'}).join('')+'<td>'+(Q.cats.length>1?'<button type="button" data-i="'+i+'" data-f="xc">×</button>':'')+'</td></tr>'});
+ $('qtb').innerHTML=h+'</table>'}
+$('qtb').addEventListener('input',function(e){var t=e.target,f=t.dataset.f,k=+t.dataset.k,i=+t.dataset.i;
+ if(f=='c')Q.ser[k].c=t.value;else if(f=='n')Q.ser[k].n=t.value;else if(f=='cat')Q.cats[i]=t.value;else if(f=='v')Q.ser[k].v[i]=pf(t.value);else return;render()});
+$('qtb').addEventListener('click',function(e){var f=e.target.dataset.f,k=+e.target.dataset.k,i=+e.target.dataset.i;
+ if(f=='xs')Q.ser.splice(k,1);else if(f=='xc'){Q.cats.splice(i,1);Q.ser.forEach(function(s){s.v.splice(i,1)})}else return;tb();render()});
+$('qap').onclick=function(){Q.cats.push('Novo');Q.ser.forEach(function(s){s.v.push(0)});tb();render()};
+$('qas').onclick=function(){Q.ser.push({n:'NOVO CANDIDATO',c:PAL[Q.ser.length%PAL.length],v:Q.cats.map(function(){return 0})});tb();render()};
+[['qtype','type'],['qdec','dec'],['qmax','max'],['qfs','fs']].forEach(function(a){$(a[0]).oninput=$(a[0]).onchange=function(){Q[a[1]]=this.value;render()}});
+[['qvals','vals'],['qgrid','grid'],['qpct','pct'],['qsort','sort']].forEach(function(a){$(a[0]).onchange=function(){Q[a[1]]=this.checked;render()}});
+function sync(){$('qtype').value=Q.type;$('qvals').checked=Q.vals;$('qgrid').checked=Q.grid;$('qdec').value=Q.dec;$('qpct').checked=Q.pct;$('qmax').value=Q.max;$('qfs').value=Q.fs||0;$('qsort').checked=Q.sort}
+window.__qs=function(){return JSON.parse(JSON.stringify(Q))};
+window.__ql=function(o){Q=o;sync();tb();render()};
+var oldTab=window.tab;
+window.tab=function(n){oldTab(n);var on=n==5;$('s5').classList.toggle('show',on);$('t5').classList.toggle('on',on);if(on){showP('pq');render()}};
+$('t5').onclick=function(){window.tab(5)};
+sync();tb();render();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(render);
 })();
 </script>
 </body>
